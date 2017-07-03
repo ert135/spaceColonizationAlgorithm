@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target":"es5",
+        "module": "system",
+        "noImplicitAny": true,
+        "removeComments": true,
+        "preserveConstEnums": true,
+        "outFile": "./bin/main.js",
+        "sourceMap": true,
+        "typeRoots" : ["./typings"]
+    },
+    "include": [
+        "src/**/*"
+    ],
+    "exclude": [
+        "node_modules",
+        "**/*.spec.ts"
+    ]
+}
