@@ -9,11 +9,27 @@ export default class Branch {
         this.direction = direction;
     }
 
-    public drawBranch() {
-        console.log('Drawing branch')
+    private doesParentBranchExist(): boolean {
+        return this.parent != null ? true : false
+    }
+
+    private getNextPosition(): p5.Vector {
+        console.log(this.position.add(this.direction))
+        return this.position.add(this.direction)
+    }
+
+    public drawBranch(): void {
+        if(this.parent != null){
+            stroke(255)
+            line(this.position.x, this.position.y, this.parent.position.x, this.parent.position.y)
+        }
     }
 
     public getPosition(): p5.Vector {
         return this.position;
+    }
+
+    public getNextBranch(): Branch {
+        return new Branch(this.getNextPosition(), this, this.direction.copy())
     }
 }

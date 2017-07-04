@@ -7,19 +7,23 @@ export default class Tree {
     private numberOfLeaves: number;
     private branches: Branch[];
     private root: Branch;
+    private maxDistance: number;
+    private minDistance: number
 
-    constructor(leafAmount: number, rootVector: p5.Vector) {
+    constructor(
+        leafAmount: number, 
+        rootVector: p5.Vector,
+        maxDistance: number,
+        minDistance: number
+    ) {
+        this.createEmptyBranchesArray();
         this.numberOfLeaves = leafAmount;
+        this.maxDistance = maxDistance;
+        this.minDistance = minDistance;
         this.setLeafsToEmptyArray();
         this.generateLeafs();
         this.createTreeRoot(rootVector);
-        this.createEmptyBranchesArray();
-        this.pushRoot();
-        this.checkLeafDistances();
-    }
-
-    private pushRoot(): void {
-        this.branches.push(this.root);
+        this.growTree();
     }
 
     private createEmptyBranchesArray(): void {
@@ -27,7 +31,8 @@ export default class Tree {
     }
 
     private createTreeRoot(rootPositionVector: p5.Vector): void {
-        this.root = new Branch(rootPositionVector, null, createVector(0,-1))
+        this.root = new Branch(rootPositionVector, null, createVector(0, -1));
+        this.branches.push(this.root);
     }
 
     private setLeafsToEmptyArray(): void {
@@ -40,15 +45,50 @@ export default class Tree {
         }
     }
 
-    public drawLeaves(): void {
+    private checkMaxDistance(distance: number): boolean {
+        return distance < this.maxDistance ? true : false;
+    }
+
+    private checkMinDistance(distance: number): boolean {
+        return distance > this.minDistance ? true : false;
+    }
+
+    private foundLeaf(): boolean {
+        return true;
+    }
+
+    private drawLeaves(): void {
         this.leaves.map((leaf: Leaf) => {
-            leaf.draw()
+            leaf.draw();
         })
     }
 
-    public checkLeafDistances(): void {
-        this.leaves.map((leaf) => {
-            let distance = this.root.getPosition().dist(leaf.getPosition());
+    private drawBranches(): void {
+        this.branches.map((branch) => {
+            branch.drawBranch();
         })
+    }
+
+    public draw(): void {
+        this.drawLeaves();
+        this.drawBranches();
+    }
+
+    public growTree(): void {
+        let found = false
+        let currentBranch = this.root;
+        
+        while(!found){
+            console.log()
+            this.leaves.map((leaf) => {
+                // console.log("root is at", this.root.getPosition())
+                if(this.checkMaxDistance(this.root.getPosition().dist(leaf.getPosition()))){
+                    found = true
+                }
+            })
+            if(!found) {
+                this.branches.push(currentBranch.getNextBranch())
+            }
+        }
     }
 }
