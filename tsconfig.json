@@ -1,20 +1,22 @@
 {
     "compilerOptions": {
-        "target":"es5",
-        "module": "system",
-        "noImplicitAny": true,
-        "removeComments": true,
-        "preserveConstEnums": true,
-        "outFile": "./bin/main.js",
+        "outDir": "./dist/",
         "sourceMap": true,
-        "typeRoots" : ["./typings"],
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
         "allowJs": true
     },
     "include": [
-        "src/**/*"
+        "./src/**/*"
     ],
     "exclude": [
         "node_modules",
         "**/*.spec.ts"
+    ],
+    "files": [
+        "src/ts/*.ts",
+        "typings/**/*.ts"
     ]
 }

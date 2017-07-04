@@ -1,25 +1,27 @@
 {
-  "name": "tree",
-  "version": "1.0.0",
-  "description": "Drawing trees",
-  "main": "index.js",
-  "scripts": {
-    "test": "grunt test",
-    "compile": "tsc",
-    "watch": "tsc -w"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ert135/spaceColonizationAlgorithm.git"
-  },
-  "author": "Robert Smith",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/ert135/spaceColonizationAlgorithm/issues"
-  },
-  "homepage": "https://github.com/ert135/spaceColonizationAlgorithm#readme",
-  "dependencies": {
-    "p5": "^0.5.11",
-    "typescript": "^2.4.1"
-  }
-}
+	"name": "tree",
+	"version": "1.0.0",
+	"description": "Drawing trees",
+	"main": "index.js",
+	"scripts": {
+		"test": "grunt test",
+		"compile": "tsc",
+		"watch": "tsc -w"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/ert135/spaceColonizationAlgorithm.git"
+	},
+	"author": "Robert Smith",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/ert135/spaceColonizationAlgorithm/issues"
+	},
+	"homepage": "https://github.com/ert135/spaceColonizationAlgorithm#readme",
+		"dependencies": {
+			"awesome-typescript-loader": "^3.2.1",
+			"p5": "^0.5.11",
+			"source-map-loader": "^0.2.1",
+			"typescript": "^2.4.1"
+		}
+	}
