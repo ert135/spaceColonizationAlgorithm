@@ -1,1 +1,1 @@
-/// <reference path="globals/p5-global/index.d.ts" />
+/// <reference path="../p5-global-mode.d.ts" />

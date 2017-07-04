@@ -1,9 +1,16 @@
+///<reference path='../p5-global-mode.d.ts'/>
+
 export default class Leaf {
-    constructor(){
-        
+    private position: p5.Vector;
+
+    constructor() {
+        //TODO change to pass in values, plan to add functionality to draw tree in future so need a way to constrain drawing area
+        this.position = createVector(random(0, 800), random(0, 800))
     }
 
-    drawLeaf(){
-        console.log('Drawing leaf')
+    public draw() {
+        fill(255);
+        noStroke();
+        ellipse(this.position.x, this.position.y, 6, 6)
     }
 }

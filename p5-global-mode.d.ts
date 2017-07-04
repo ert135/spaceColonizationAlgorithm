@@ -2,7 +2,6 @@
 
 ///<reference path="p5.d.ts" />
 
-
 // Properties from p5
 
 // src/3d/3d_primitives.js
@@ -1203,7 +1202,7 @@ declare function sqrt(n: number): number;
 /**
  * Creates a new p5.Vector (the datatype for storing vectors).
  */
-declare function createVector(x?: number, y?: number, z?: number): void;
+declare function createVector(x?: number, y?: number, z?: number): p5.Vector;
 
 // src/math/noise.js
 
