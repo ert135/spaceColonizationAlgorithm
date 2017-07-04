@@ -18,8 +18,9 @@ var min_distance = 10;
 
 let setup = function() {
     createCanvas(800, 800);
-    tree = new Tree(500, createVector(width/2, 700), max_distance, min_distance);
+    tree = new Tree(500, createVector(width/2, 800), max_distance, min_distance);
 }
+
 
 let draw = function() {
     background(51);

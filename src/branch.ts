@@ -14,13 +14,12 @@ export default class Branch {
     }
 
     private getNextPosition(): p5.Vector {
-        console.log(this.position.add(this.direction))
-        return this.position.add(this.direction)
+        return this.position.add(0, -1).copy()
     }
 
     public drawBranch(): void {
         if(this.parent != null){
-            stroke(255)
+            stroke(204, 102, 0);
             line(this.position.x, this.position.y, this.parent.position.x, this.parent.position.y)
         }
     }
@@ -29,7 +28,8 @@ export default class Branch {
         return this.position;
     }
 
-    public getNextBranch(): Branch {
+    public getNextBranch(): any {
+        console.log('new branch is', new Branch(this.getNextPosition(), this, this.direction.copy()))
         return new Branch(this.getNextPosition(), this, this.direction.copy())
     }
 }

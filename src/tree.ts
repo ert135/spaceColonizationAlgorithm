@@ -77,12 +77,12 @@ export default class Tree {
     public growTree(): void {
         let found = false
         let currentBranch = this.root;
-        
+
         while(!found){
             console.log()
             this.leaves.map((leaf) => {
-                // console.log("root is at", this.root.getPosition())
                 if(this.checkMaxDistance(this.root.getPosition().dist(leaf.getPosition()))){
+                    console.log('condition true!!!')
                     found = true
                 }
             })
@@ -90,5 +90,8 @@ export default class Tree {
                 this.branches.push(currentBranch.getNextBranch())
             }
         }
+
+        console.log("found is now", found);
+        console.log(this.branches);
     }
 }
