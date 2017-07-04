@@ -13,4 +13,8 @@ export default class Leaf {
         noStroke();
         ellipse(this.position.x, this.position.y, 6, 6)
     }
+
+    public getPosition(): p5.Vector {
+        return this.position;
+    }
 }

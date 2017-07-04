@@ -9,7 +9,11 @@ export default class Branch {
         this.direction = direction;
     }
 
-    drawBranch() {
+    public drawBranch() {
         console.log('Drawing branch')
+    }
+
+    public getPosition(): p5.Vector {
+        return this.position;
     }
 }

@@ -2198,7 +2198,6 @@ declare namespace p5 {
      * a Euclidean (also known as geometric) vector.
      */
     constructor(x?: number, y?: number, z?: number)
-    
     /**
      * The x component of the vector
      */

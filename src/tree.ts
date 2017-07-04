@@ -2,6 +2,7 @@ import Leaf from "./leaf";
 import Branch from "./branch";
 
 export default class Tree {
+
     private leaves: Leaf[]
     private numberOfLeaves: number;
     private branches: Branch[];
@@ -14,6 +15,7 @@ export default class Tree {
         this.createTreeRoot(rootVector);
         this.createEmptyBranchesArray();
         this.pushRoot();
+        this.checkLeafDistances();
     }
 
     private pushRoot(): void {
@@ -41,6 +43,12 @@ export default class Tree {
     public drawLeaves(): void {
         this.leaves.map((leaf: Leaf) => {
             leaf.draw()
+        })
+    }
+
+    public checkLeafDistances(): void {
+        this.leaves.map((leaf) => {
+            let distance = this.root.getPosition().dist(leaf.getPosition());
         })
     }
 }

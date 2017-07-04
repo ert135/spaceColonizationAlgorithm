@@ -13,6 +13,8 @@ declare global {
 }
 
 var tree: Tree
+var max_distance = 500;
+var min_distance = 10;
 
 let setup = function() {
     createCanvas(800, 800);
