@@ -21,7 +21,7 @@ var pressed = false
 
 let setup = function() {
     createCanvas(800, 800);
-    tree = new Tree(1500, createVector(width/2, 800), max_distance, min_distance);
+    tree = new Tree(4000, createVector(width/2, 800), max_distance, min_distance);
 }
 
 

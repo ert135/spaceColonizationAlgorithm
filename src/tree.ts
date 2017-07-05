@@ -95,7 +95,7 @@ export default class Tree {
 
             for (var j = 0; j < this.branches.length; j++) {
                 var branch = this.branches[j];
-                var d = leaf.getPosition().dist(branch.getPosition().copy());
+                var d = leaf.getPosition().dist(branch.getPosition());
                 if (d < this.minDistance) {
                     leaf.setReached();
                     closestBranch = null;

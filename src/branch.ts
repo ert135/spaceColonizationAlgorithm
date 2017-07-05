@@ -13,8 +13,7 @@ export default class Branch {
 
     constructor(position: p5.Vector, parent: Branch, direction: p5.Vector) {
         this.position = position;
-        var newObj = {...parent};
-        this.parent = newObj;
+
         this.direction = direction;
         this.originalDirection = direction.copy();
         this.count = 0;
@@ -34,9 +33,11 @@ export default class Branch {
     }
 
     public drawBranch(): void {
-        if(this.parent != null && this.parentPositionX !=null && this.parentpositionY != null) {
+        if(this.parentPositionX !=null && this.parentpositionY != null) {
             stroke(204, 102, 0);
-            line(this.position.x, this.position.y,  this.parentPositionX,  this.parentpositionY)
+            if(this.parentPositionX && this.parentpositionY){
+                line(this.position.x, this.position.y,  this.parentPositionX,  this.parentpositionY)
+            }
         }
     }
 
