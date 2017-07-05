@@ -31,7 +31,7 @@ export default class Tree {
     }
 
     private createTreeRoot(rootPositionVector: p5.Vector): void {
-        this.root = new Branch(rootPositionVector, null, createVector(0, -1));
+        this.root = new Branch(rootPositionVector, rootPositionVector.x, rootPositionVector.y, createVector(0, -1));
         this.branches.push(this.root);
     }
 

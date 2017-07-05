@@ -11,17 +11,15 @@ export default class Branch {
     private parentPositionX: number;
     private parentpositionY: number;
 
-    constructor(position: p5.Vector, parent: Branch, direction: p5.Vector) {
+    constructor(position: p5.Vector, lastPositionX: number, lastPositionY: number, direction: p5.Vector) {
         this.position = position;
 
         this.direction = direction;
         this.originalDirection = direction.copy();
         this.count = 0;
         this.length = 5;
-        if(parent){
-            this.parentPositionX = parent.position.x;
-            this.parentpositionY = parent.position.y;
-        }
+        this.parentPositionX = lastPositionX;
+        this.parentpositionY = lastPositionY;
     }
 
     public getDirection(): p5.Vector {
@@ -57,6 +55,6 @@ export default class Branch {
     public next(): Branch {
         var nextDir = this.direction.copy().mult(this.length);
         var nextPos = this.position.add(nextDir).copy();
-        return new Branch(nextPos, this, this.direction.copy());
+        return new Branch(nextPos, this.getPosition().x, this.getPosition().y, this.direction.copy());
     }
 }
