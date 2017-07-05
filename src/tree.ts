@@ -89,7 +89,6 @@ export default class Tree {
     public growBranches(): void {
 
         for (var i = 0; i < this.leaves.length; i++) {
-            console.log('grow branches called!!!');
             var leaf = this.leaves[i];
             var closestBranch = null;
             var record = this.maxDistance;
