@@ -13,18 +13,19 @@ declare global {
 }
 
 var tree: Tree
-var max_distance = 10;
+var max_distance = 200;
 var min_distance = 10;
 
 let setup = function() {
     createCanvas(800, 800);
-    tree = new Tree(500, createVector(width/2, 800), max_distance, min_distance);
+    tree = new Tree(1500, createVector(width/2, 800), max_distance, min_distance);
 }
 
 
 let draw = function() {
     background(51);
     tree.draw();
+    tree.growBranches();
 }
 
 window.setup = setup;

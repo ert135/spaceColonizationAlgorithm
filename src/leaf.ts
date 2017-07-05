@@ -2,10 +2,12 @@
 
 export default class Leaf {
     private position: p5.Vector;
+    private reached: boolean;
 
     constructor() {
         //TODO change to pass in values, plan to add functionality to draw tree in future so need a way to constrain drawing area
         this.position = createVector(random(0, 800), random(0, 600))
+        this.reached = false;
     }
 
     public draw() {
@@ -17,4 +19,13 @@ export default class Leaf {
     public getPosition(): p5.Vector {
         return this.position;
     }
+
+    public setReached(): void {
+        this.reached = true
+    }
+
+    public getReached(): boolean {
+        return this.reached;
+    }
+    
 }

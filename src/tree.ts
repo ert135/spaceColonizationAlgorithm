@@ -23,7 +23,7 @@ export default class Tree {
         this.setLeafsToEmptyArray();
         this.generateLeafs();
         this.createTreeRoot(rootVector);
-        this.growTree();
+        this.growRoot();
     }
 
     private createEmptyBranchesArray(): void {
@@ -53,10 +53,6 @@ export default class Tree {
         return distance > this.minDistance ? true : false;
     }
 
-    private foundLeaf(): boolean {
-        return true;
-    }
-
     private drawLeaves(): void {
         this.leaves.map((leaf: Leaf) => {
             leaf.draw();
@@ -74,24 +70,67 @@ export default class Tree {
         this.drawBranches();
     }
 
-    public growTree(): void {
+    public growRoot(): void {
         let found = false
         let currentBranch = this.root;
 
         while(!found){
-            console.log()
             this.leaves.map((leaf) => {
                 if(this.checkMaxDistance(this.root.getPosition().dist(leaf.getPosition()))){
-                    console.log('condition true!!!')
                     found = true
                 }
             })
             if(!found) {
-                this.branches.push(currentBranch.getNextBranch())
+                this.branches.push(currentBranch.next())
+            }
+        }
+    }
+
+    public growBranches(): void {
+
+        for (var i = 0; i < this.leaves.length; i++) {
+            console.log('grow branches called!!!');
+            var leaf = this.leaves[i];
+            var closestBranch = null;
+            var record = this.maxDistance;
+
+            for (var j = 0; j < this.branches.length; j++) {
+                var branch = this.branches[j];
+                var d = leaf.getPosition().dist(branch.getPosition().copy());
+                if (d < this.minDistance) {
+                    leaf.setReached();
+                    closestBranch = null;
+                    break;
+                } 
+                else if (d < record) {
+                    closestBranch = branch;
+                    record = d;
+                }
+            }
+
+            if (closestBranch != null) {
+                var newDirection = leaf.getPosition().sub(closestBranch.getPosition().copy());
+                newDirection.normalize();
+                closestBranch.getDirection().add(newDirection.copy()); 
+                closestBranch.incrementCount();
             }
         }
 
-        console.log("found is now", found);
-        console.log(this.branches);
+        for (var i = this.leaves.length - 1; i >= 0; i--) {
+            if (this.leaves[i].getReached()) {
+                this.leaves.splice(i, 1);
+            }
+        }
+
+        for (var i = this.branches.length - 1; i >= 0; i--) {
+            var branch = this.branches[i];
+            if (branch.getCount() > 0) {
+                branch.getDirection().div(branch.getCount() + 1);
+                this.branches.push(branch.next());
+                branch.resetCount();
+            }
+        }
+
     }
+
 }

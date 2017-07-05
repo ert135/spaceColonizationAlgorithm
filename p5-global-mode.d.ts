@@ -6,6 +6,8 @@
 
 // src/3d/3d_primitives.js
 
+declare function mult(vec1: p5.Vector, vec2: p5.Vector): p5.Vector;
+
 /**
  * Draw a plane with given a width and height
  */
