@@ -9,12 +9,15 @@ declare global {
     interface Window { 
         setup: any;
         draw: any;
+        mousePressed: any;
+        mouseReleased: any;
     }
 }
 
 var tree: Tree
-var max_distance = 200;
+var max_distance = 100;
 var min_distance = 10;
+var pressed = false
 
 let setup = function() {
     createCanvas(800, 800);
@@ -24,9 +27,21 @@ let setup = function() {
 
 let draw = function() {
     background(51);
-    tree.draw();
-    tree.growBranches();
+    if(pressed){
+        tree.draw();
+        tree.growBranches();
+    }
 }
 
+let mousePressed = function(){
+    pressed = true
+}
+
+let mouseReleased = function(){
+    pressed = false
+}
+
+window.mouseReleased = mousePressed
+window.mousePressed = mousePressed
 window.setup = setup;
 window.draw = draw;

@@ -17,7 +17,7 @@ export default class Leaf {
     }
 
     public getPosition(): p5.Vector {
-        return this.position;
+        return this.position.copy();
     }
 
     public setReached(): void {

@@ -108,6 +108,7 @@ export default class Tree {
             }
 
             if (closestBranch != null) {
+                console.log('branch found')
                 var newDirection = leaf.getPosition().sub(closestBranch.getPosition().copy());
                 newDirection.normalize();
                 closestBranch.getDirection().add(newDirection.copy()); 
@@ -126,7 +127,7 @@ export default class Tree {
             if (branch.getCount() > 0) {
                 branch.getDirection().div(branch.getCount() + 1);
                 this.branches.push(branch.next());
-                branch.resetCount();
+                branch.reset();
             }
         }
 

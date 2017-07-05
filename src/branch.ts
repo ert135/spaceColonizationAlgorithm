@@ -25,10 +25,6 @@ export default class Branch {
         }
     }
 
-    private getNextPosition(): p5.Vector {
-        return this.position.add(0, -1).copy()
-    }
-
     public getDirection(): p5.Vector {
         return this.direction;
     }
@@ -48,15 +44,11 @@ export default class Branch {
         return this.position;
     }
 
-    public getNextBranch(): any {
-        return new Branch(this.getNextPosition(), this, this.direction.copy())
-    }
-
     public getCount(): number {
         return this.count;
     }
 
-    public resetCount(): void {
+    public reset(): void {
         this.direction = this.originalDirection.copy();
         this.count = 0;
     }
