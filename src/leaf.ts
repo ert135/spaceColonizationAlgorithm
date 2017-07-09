@@ -13,7 +13,7 @@ export default class Leaf {
     public draw() {
         fill(255);
         noStroke();
-        ellipse(this.position.x, this.position.y, 3, 3)
+        ellipse(this.position.x, this.position.y, 1, 1)
     }
 
     public getPosition(): p5.Vector {

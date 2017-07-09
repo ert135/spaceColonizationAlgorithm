@@ -81,7 +81,7 @@ export default class Tree {
                 }
             })
             if(!found) {
-                this.branches.push(currentBranch.next())
+                this.branches.push(currentBranch.next(this.root.getPosition().copy()))
             }
         }
     }
@@ -123,7 +123,7 @@ export default class Tree {
             var branch = this.branches[i];
             if (branch.getCount() > 0) {
                 branch.getDirection().div(branch.getCount() + 1);
-                this.branches.push(branch.next());
+                this.branches.push(branch.next(branch.getPosition().copy()));
                 branch.reset();
             }
         }

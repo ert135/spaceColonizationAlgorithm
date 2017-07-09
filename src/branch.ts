@@ -32,7 +32,7 @@ export default class Branch {
 
     public drawBranch(): void {
             stroke(204, 102, 0);
-            line( this.getPosition().copy().x, this.getPosition().copy().y, this.getPosition().copy().x, this.getPosition().copy().y)
+            line(this.getPosition().copy().x, this.getPosition().copy().y, this.getPosition().copy().x, this.getPosition().copy().y)
     }
 
     public getPosition(): p5.Vector {
@@ -48,8 +48,8 @@ export default class Branch {
         this.count = 0;
     }
 
-    public next(): Branch {
-        let oldPosition = this.position.copy();
+    public next(oldPositionTest: p5.Vector): Branch {
+        let oldPosition = oldPositionTest;
         var nextDir = this.direction.copy().mult(this.length);
         var nextPos = this.position.add(nextDir).copy();
         return new Branch(nextPos, oldPosition.copy().x, oldPosition.copy().y, this.direction.copy());
