@@ -12,12 +12,12 @@ export default class Branch {
     private parentpositionY: number;
 
     constructor(position: p5.Vector, lastPositionX: number, lastPositionY: number, direction: p5.Vector) {
-        this.position = position;
+        this.position = position.copy();
 
         this.direction = direction;
         this.originalDirection = direction.copy();
         this.count = 0;
-        this.length = 5;
+        this.length = 2;
         this.parentPositionX = lastPositionX;
         this.parentpositionY = lastPositionY;
     }
@@ -31,12 +31,8 @@ export default class Branch {
     }
 
     public drawBranch(): void {
-        if(this.parentPositionX !=null && this.parentpositionY != null) {
             stroke(204, 102, 0);
-            if(this.parentPositionX && this.parentpositionY){
-                line(this.position.x, this.position.y,  this.parentPositionX,  this.parentpositionY)
-            }
-        }
+            line( this.getPosition().copy().x, this.getPosition().copy().y, this.getPosition().copy().x, this.getPosition().copy().y)
     }
 
     public getPosition(): p5.Vector {
@@ -53,8 +49,9 @@ export default class Branch {
     }
 
     public next(): Branch {
+        let oldPosition = this.position.copy();
         var nextDir = this.direction.copy().mult(this.length);
         var nextPos = this.position.add(nextDir).copy();
-        return new Branch(nextPos, this.getPosition().x, this.getPosition().y, this.direction.copy());
+        return new Branch(nextPos, oldPosition.copy().x, oldPosition.copy().y, this.direction.copy());
     }
 }

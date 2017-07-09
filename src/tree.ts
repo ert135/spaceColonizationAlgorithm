@@ -17,12 +17,12 @@ export default class Tree {
         minDistance: number
     ) {
         this.createEmptyBranchesArray();
+        this.createTreeRoot(rootVector);
         this.numberOfLeaves = leafAmount;
         this.maxDistance = maxDistance;
         this.minDistance = minDistance;
         this.setLeafsToEmptyArray();
         this.generateLeafs();
-        this.createTreeRoot(rootVector);
         this.growRoot();
     }
 
@@ -31,7 +31,7 @@ export default class Tree {
     }
 
     private createTreeRoot(rootPositionVector: p5.Vector): void {
-        this.root = new Branch(rootPositionVector, rootPositionVector.x, rootPositionVector.y, createVector(0, -1));
+        this.root = new Branch(rootPositionVector.copy(), rootPositionVector.copy().x, rootPositionVector.copy().y, createVector(0, -1));
         this.branches.push(this.root);
     }
 
@@ -54,13 +54,13 @@ export default class Tree {
     }
 
     private drawLeaves(): void {
-        this.leaves.map((leaf: Leaf) => {
+        this.leaves.forEach((leaf: Leaf) => {
             leaf.draw();
         })
     }
 
     private drawBranches(): void {
-        this.branches.map((branch) => {
+        this.branches.forEach((branch) => {
             branch.drawBranch();
         })
     }
@@ -108,7 +108,6 @@ export default class Tree {
             }
 
             if (closestBranch != null) {
-                console.log('branch found')
                 var newDirection = leaf.getPosition().sub(closestBranch.getPosition().copy());
                 newDirection.normalize();
                 closestBranch.getDirection().add(newDirection.copy()); 
@@ -116,11 +115,9 @@ export default class Tree {
             }
         }
 
-        for (var i = this.leaves.length - 1; i >= 0; i--) {
-            if (this.leaves[i].getReached()) {
-                this.leaves.splice(i, 1);
-            }
-        }
+        this.leaves = this.leaves.filter((leaf) => {
+            return !leaf.getReached();
+        })
 
         for (var i = this.branches.length - 1; i >= 0; i--) {
             var branch = this.branches[i];
