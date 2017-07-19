@@ -31,7 +31,7 @@ export default class Tree {
     }
 
     private createTreeRoot(rootPositionVector: p5.Vector): void {
-        this.root = new Branch(rootPositionVector.copy(), rootPositionVector.copy().x, rootPositionVector.copy().y, createVector(0, -1));
+        this.root = new Branch(rootPositionVector.copy(), null, createVector(0, -1));
         this.branches.push(this.root);
     }
 
@@ -81,7 +81,7 @@ export default class Tree {
                 }
             })
             if(!found) {
-                this.branches.push(currentBranch.next(this.root.getPosition().copy()))
+                this.branches.push(currentBranch.next())
             }
         }
     }
@@ -123,7 +123,7 @@ export default class Tree {
             var branch = this.branches[i];
             if (branch.getCount() > 0) {
                 branch.getDirection().div(branch.getCount() + 1);
-                this.branches.push(branch.next(branch.getPosition().copy()));
+                this.branches.push(branch.next());
                 branch.reset();
             }
         }
