@@ -1945,14 +1945,18 @@ declare namespace p5 {
      * Image height.
      */
     height: any
+
+    pixels: any[];
     
     // TODO: Property "pixels[]", defined in src/image/p5.Image.js, is not a valid JS symbol name
     
     /**
      * Loads the pixels data for this image into the [pixels] attribute.
      */
-    loadPixels(): void
-    
+    loadPixels(): void;
+
+    updatePixels(): void;
+
     // TODO: Fix updatePixels() errors in src/image/p5.Image.js:
     //
     //   param "x" has invalid type: Integer|undefined

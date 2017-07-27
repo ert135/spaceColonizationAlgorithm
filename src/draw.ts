@@ -3,6 +3,7 @@
 
 //import modules
 import Tree from "./tree";
+import imageProcessor from "./imageProcessor";
 
 //extend existing window property, we have to put the draw and setup functinos of the global window object for p5 to work in global mode
 declare global {
@@ -11,6 +12,7 @@ declare global {
         draw: any;
         mousePressed: any;
         mouseReleased: any;
+        preload: any;
     }
 }
 
@@ -18,15 +20,22 @@ var tree: Tree
 var max_distance = 100;
 var min_distance = 10;
 var pressed = false
+var image: imageProcessor;
+var sourceImage: p5.Image;
+//preload image
+
+let preload = function() {
+    sourceImage = loadImage("./image.jpg");
+}
 
 let setup = function() {
     createCanvas(800, 800);
-    tree = new Tree(500, createVector(width/2, 800), max_distance, min_distance);
+    image = new imageProcessor(sourceImage);
+    tree = new Tree(200, createVector(width/2, 800), max_distance, min_distance, sourceImage);
 }
 
-
 let draw = function() {
-    background(51);
+    image.drawImage();
     if(pressed){
         tree.draw();
         tree.growBranches();
@@ -41,6 +50,7 @@ let mouseReleased = function(){
     pressed = false
 }
 
+window.preload = preload;
 window.mouseReleased = mousePressed
 window.mousePressed = mousePressed
 window.setup = setup;

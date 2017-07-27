@@ -61,7 +61,7 @@ export default class Branch {
 
     public setPreviousPosition(position: p5.Vector): void {
         this.lastPosition = position.copy()
-                ellipse(this.lastPosition.copy().x, this.lastPosition.copy().y, 10, 10)
+        //ellipse(this.lastPosition.copy().x, this.lastPosition.copy().y, 10, 10)
     }
 
     public setParent(parent: Branch) {

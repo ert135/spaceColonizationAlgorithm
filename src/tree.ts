@@ -9,12 +9,14 @@ export default class Tree {
     private root: Branch;
     private maxDistance: number;
     private minDistance: number
+    private image: p5.Image;
 
     constructor(
         leafAmount: number, 
         rootVector: p5.Vector,
         maxDistance: number,
-        minDistance: number
+        minDistance: number,
+        image: p5.Image
     ) {
         this.createEmptyBranchesArray();
         this.createTreeRoot(rootVector);
@@ -41,7 +43,7 @@ export default class Tree {
 
     private generateLeafs(): void {
         for (var i = 0; i < this.numberOfLeaves; i++) {
-            this.leaves.push(new Leaf());
+            this.leaves.push(new Leaf(this.image));
         }
     }
 

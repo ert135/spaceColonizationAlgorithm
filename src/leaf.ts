@@ -3,11 +3,18 @@
 export default class Leaf {
     private position: p5.Vector;
     private reached: boolean;
+    private image: p5.Image;
 
-    constructor() {
+    constructor(image: p5.Image) {
         //TODO change to pass in values, plan to add functionality to draw tree in future so need a way to constrain drawing area
-        this.position = createVector(random(0, 800), random(0, 600))
+        this.position = this.getBlackPosition()
         this.reached = false;
+        this.image = image;
+    }
+
+    private getBlackPosition(): p5.Vector {
+
+        return createVector(0,0);
     }
 
     public draw() {
