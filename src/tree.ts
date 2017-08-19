@@ -11,23 +11,26 @@ export default class Tree {
     private minDistance: number
     private image: p5.Image;
     private startVector: p5.Vector;
+    private imageProcessor: any;
 
     constructor(
         leafAmount: number, 
         maxDistance: number,
         minDistance: number,
-        image: p5.Image
+        image: p5.Image,
+        imageProcessor: any
     ) {
+        this.imageProcessor = imageProcessor;
         this.createEmptyBranchesArray();
         this.numberOfLeaves = leafAmount;
         this.maxDistance = maxDistance;
         this.minDistance = minDistance;
         this.setLeafsToEmptyArray();
         this.generateLeafs();
+        this.filterLeaves();
     }
 
     public setStartVector(vector: p5.Vector): void {
-        console.log('Calling get start vector!!!', vector);
         this.startVector = vector;
         this.createTreeRoot();
         this.growRoot();
@@ -39,7 +42,7 @@ export default class Tree {
 
     private createTreeRoot(): void {
         this.root = [];
-        console.log('This is ', this.startVector);
+
         if(this.startVector){
             this.root.push(new Branch(this.startVector.copy(), null, createVector(0, -1)));
             this.root.push( new Branch(this.startVector.copy(), null, createVector(0, 1)))
@@ -60,6 +63,13 @@ export default class Tree {
         for (var i = 0; i < this.numberOfLeaves; i++) {
             this.leaves.push(new Leaf());
         }
+    }
+
+    private filterLeaves(): void {
+        this.leaves = this.leaves.filter((leaf) => {
+            let leafPosition = leaf.getPosition();
+            return this.imageProcessor.getColorAtPosition(leafPosition);
+        })
     }
 
     private checkMaxDistance(distance: number): boolean {
@@ -92,7 +102,6 @@ export default class Tree {
             let found = false
             let currentBranch = root;
             while(!found){
-                console.log('Leaves are ', this.leaves);
                 this.leaves.map((leaf) => {
                     if(this.checkMaxDistance(root.getPosition().dist(leaf.getPosition()))){
                         found = true

@@ -54,5 +54,21 @@ export default class imageProcessor {
     public drawImage(): void {
         image(this.destinationImage, 0, 0);
     }
+
+    public getColorAtPosition(position: p5.Vector): boolean {
+
+        let blackArray = JSON.stringify([0,0,0,255]);
+        let whiteArray = JSON.stringify([255,255,255,255]);
+
+        if(JSON.stringify(this.destinationImage.get(position.x, position.y)) === blackArray){
+            return true;
+        }
+
+        if(JSON.stringify(this.destinationImage.get(position.x, position.y)) === whiteArray){
+            console.log('Whiate array true!!!');
+            return false;
+        }
+
+    }
     
 }

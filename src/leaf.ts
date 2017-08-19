@@ -20,7 +20,7 @@ export default class Leaf {
         fill(255);
         noStroke();
 
-        ellipse(this.position.x, this.position.y, 1, 1)
+        // ellipse(this.position.x, this.position.y, 1, 1)
     }
 
     public getPosition(): p5.Vector {

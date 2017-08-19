@@ -1957,6 +1957,8 @@ declare namespace p5 {
 
     updatePixels(): void;
 
+    get(x: number, y: number, w?: number, h?: number): any;
+
     // TODO: Fix updatePixels() errors in src/image/p5.Image.js:
     //
     //   param "x" has invalid type: Integer|undefined

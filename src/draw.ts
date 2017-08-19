@@ -24,7 +24,7 @@ let pressed = false
 let image: imageProcessor;
 let sourceImage: p5.Image;
 let startVector: p5.Vector;
-let numberOfLeaves = 800;
+let numberOfLeaves = 1000;
 
 let preload = function() {
     sourceImage = loadImage("./image.jpg");
@@ -32,13 +32,13 @@ let preload = function() {
 
 let setup = function() {
     createCanvas(800, 800);
-    // image = new imageProcessor(sourceImage);
-    tree = new Tree(numberOfLeaves, max_distance, min_distance, sourceImage);
+    image = new imageProcessor(sourceImage);
+    tree = new Tree(numberOfLeaves, max_distance, min_distance, sourceImage, image);
 }
 
 let draw = function() {
-    background(51);
-    // image.drawImage();
+    //background(51);
+    image.drawImage();
     if(pressed){
         tree.draw();
         tree.growBranches();
