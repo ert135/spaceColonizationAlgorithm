@@ -6,35 +6,50 @@ export default class Tree {
     private leaves: Leaf[]
     private numberOfLeaves: number;
     private branches: Branch[];
-    private root: Branch;
+    private root: Branch[];
     private maxDistance: number;
     private minDistance: number
     private image: p5.Image;
+    private startVector: p5.Vector;
 
     constructor(
         leafAmount: number, 
-        rootVector: p5.Vector,
         maxDistance: number,
         minDistance: number,
         image: p5.Image
     ) {
         this.createEmptyBranchesArray();
-        this.createTreeRoot(rootVector);
         this.numberOfLeaves = leafAmount;
         this.maxDistance = maxDistance;
         this.minDistance = minDistance;
         this.setLeafsToEmptyArray();
         this.generateLeafs();
-        this.growRoot();
     }
+
+    public setStartVector(vector: p5.Vector): void {
+        console.log('Calling get start vector!!!', vector);
+        this.startVector = vector;
+        this.createTreeRoot();
+        this.growRoot();
+    }   
 
     private createEmptyBranchesArray(): void {
         this.branches = [];
     }
 
-    private createTreeRoot(rootPositionVector: p5.Vector): void {
-        this.root = new Branch(rootPositionVector.copy(), null, createVector(0, -1));
-        this.branches.push(this.root);
+    private createTreeRoot(): void {
+        this.root = [];
+        console.log('This is ', this.startVector);
+        if(this.startVector){
+            this.root.push(new Branch(this.startVector.copy(), null, createVector(0, -1)));
+            this.root.push( new Branch(this.startVector.copy(), null, createVector(0, 1)))
+            this.root.push(new Branch(this.startVector.copy(), null, createVector(1, 0)))
+            this.root.push(new Branch(this.startVector.copy(), null, createVector(-1, 0)))
+        }
+
+        this.root.forEach((root: Branch) => {
+            this.branches.push(root);
+        })
     }
 
     private setLeafsToEmptyArray(): void {
@@ -43,7 +58,7 @@ export default class Tree {
 
     private generateLeafs(): void {
         for (var i = 0; i < this.numberOfLeaves; i++) {
-            this.leaves.push(new Leaf(this.image));
+            this.leaves.push(new Leaf());
         }
     }
 
@@ -73,19 +88,21 @@ export default class Tree {
     }
 
     public growRoot(): void {
-        let found = false
-        let currentBranch = this.root;
-
-        while(!found){
-            this.leaves.map((leaf) => {
-                if(this.checkMaxDistance(this.root.getPosition().dist(leaf.getPosition()))){
-                    found = true
+        this.root.forEach((root) => {
+            let found = false
+            let currentBranch = root;
+            while(!found){
+                console.log('Leaves are ', this.leaves);
+                this.leaves.map((leaf) => {
+                    if(this.checkMaxDistance(root.getPosition().dist(leaf.getPosition()))){
+                        found = true
+                    }
+                })
+                if(!found) {
+                    this.branches.push(currentBranch.next())
                 }
-            })
-            if(!found) {
-                this.branches.push(currentBranch.next())
             }
-        }
+        })
     }
 
     public growBranches(): void {

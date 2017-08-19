@@ -26,7 +26,6 @@ export default class imageProcessor {
     private loadPixels(): void {
         this.sourceImage.loadPixels();
         this.destinationImage.loadPixels();
-        console.log(this.sourceImage.width)
     }
 
     private processImage(): void {
@@ -49,7 +48,6 @@ export default class imageProcessor {
         }
 
         this.destinationImage.updatePixels();
-        console.log('destinatino iamge is now , ', this.destinationImage);
         image(this.destinationImage, 0, 0);
     }
 

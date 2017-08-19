@@ -12,6 +12,7 @@ export default class Branch {
     private parentpositionY: number;
     private lastPosition: p5.Vector;
     private static debugArray: any;
+    public found: boolean;
 
     constructor(position: p5.Vector, lastPosition: p5.Vector, direction: p5.Vector) {
         this.position = position.copy();

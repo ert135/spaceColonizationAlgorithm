@@ -13,16 +13,18 @@ declare global {
         mousePressed: any;
         mouseReleased: any;
         preload: any;
+        mouseClicked: any;
     }
 }
 
-var tree: Tree
-var max_distance = 100;
-var min_distance = 10;
-var pressed = false
-var image: imageProcessor;
-var sourceImage: p5.Image;
-//preload image
+let tree: Tree
+let max_distance = 100;
+let min_distance = 10;
+let pressed = false
+let image: imageProcessor;
+let sourceImage: p5.Image;
+let startVector: p5.Vector;
+let numberOfLeaves = 800;
 
 let preload = function() {
     sourceImage = loadImage("./image.jpg");
@@ -30,28 +32,28 @@ let preload = function() {
 
 let setup = function() {
     createCanvas(800, 800);
-    image = new imageProcessor(sourceImage);
-    tree = new Tree(200, createVector(width/2, 800), max_distance, min_distance, sourceImage);
+    // image = new imageProcessor(sourceImage);
+    tree = new Tree(numberOfLeaves, max_distance, min_distance, sourceImage);
 }
 
 let draw = function() {
-    image.drawImage();
+    background(51);
+    // image.drawImage();
     if(pressed){
         tree.draw();
         tree.growBranches();
     }
 }
 
-let mousePressed = function(){
+let mouseClicked = function() {
     pressed = true
-}
-
-let mouseReleased = function(){
-    pressed = false
+    startVector = createVector(mouseX, mouseY);
+    tree.setStartVector(startVector);
+    console.log('Mouse calicked¬¬!¬', mouseX, mouseY);
+    console.log('Tree is ', tree);
 }
 
 window.preload = preload;
-window.mouseReleased = mousePressed
-window.mousePressed = mousePressed
 window.setup = setup;
 window.draw = draw;
+window.mouseClicked = mouseClicked;

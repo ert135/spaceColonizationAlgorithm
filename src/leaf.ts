@@ -5,11 +5,10 @@ export default class Leaf {
     private reached: boolean;
     private image: p5.Image;
 
-    constructor(image: p5.Image) {
+    constructor() {
         //TODO change to pass in values, plan to add functionality to draw tree in future so need a way to constrain drawing area
-        this.position = this.getBlackPosition()
         this.reached = false;
-        this.image = image;
+        this.position = createVector(random(0, 800), random(0, 800))
     }
 
     private getBlackPosition(): p5.Vector {
@@ -20,6 +19,7 @@ export default class Leaf {
     public draw() {
         fill(255);
         noStroke();
+
         ellipse(this.position.x, this.position.y, 1, 1)
     }
 
