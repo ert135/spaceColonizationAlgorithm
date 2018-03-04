@@ -1,4 +1,4 @@
-# space colonization algorithm
+# Space colonization algorithm
 
 An implimintation of a space colonization algorithm, written in typescript using p5. 
 
